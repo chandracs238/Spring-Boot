@@ -39,11 +39,8 @@ public class BranchService {
     }
 
     public Branch updateBranchById(Branch branch, Long id){
-        Branch updateBranch = branchRepository.findById(id).orElseThrow(() -> new BranchNotFoundException(id));
-        updateBranch.setBranchName(branch.getBranchName());
-        updateBranch.setLocation(branch.getLocation());
-        updateBranch.setContact(branch.getContact());
-        return branchRepository.save(updateBranch);
+        branchRepository.deleteById(id);
+        return branchRepository.save(branch);
     }
 
 }

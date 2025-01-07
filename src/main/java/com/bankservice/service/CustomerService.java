@@ -39,10 +39,7 @@ public class CustomerService {
     }
 
     public Customer updateCustomerById(Customer customer, Long id){
-        customerRepository.findById(id).map(customer1 -> {
-                    customer1.setCustomerName(customer.getCustomerName());
-                    customer1.setEmail(customer.getEmail());
-                    return customer1;}).orElseThrow(() -> new CustomerNotFoundException(id));
-        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+        customerRepository.deleteById(id);
+        return customerRepository.save(customer);
     }
 }
